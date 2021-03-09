@@ -404,31 +404,51 @@
 
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
+            <a style="text-decoration: none;" href="/">
             <span class="navbar-brand mb-0 h1 ml-4">SocialApp</span>
+            
+            </a>
 
             <div class=" " style="margin-left: auto">
 
-                <div style="margin: 10px">
+                <div style="margin: 10px; display:flex">
                     @if (Auth::check())
 
-                    <a href="/logout" style="text-decoration: none;">
-                        se deconnecter
-
-                    </a>
-                    @else
-                    <a class="ml-4 " href="/profile" style="text-decoration: none; float: right; right: 0">
-                    <img style="height: 50px;" class="rounded-circle" src="{{ asset('img/user/username.gif') }}" alt="">
-
-
-                    </a>
-
-                    @endif
-
-                    <a  href="/card">
+                    <a href="/card">
 
                         <img style="width: 50px; float: right; margin-top: 0px" src="{{ asset('img/logo/bag.png') }}" alt="">
 
                     </a>
+
+                    <div class="dropdown">
+                        <a style="color: #1a202c; text-decoration: none" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="ml-4 dropdown-toggle" href="/logout" style="text-decoration: none; float: right; right: 0">
+                            <img style="height: 50px;" class="rounded-circle" src="{{ asset('img/user/username.gif') }}" alt="">
+                        </a>
+                        <div style="float: left; left: 0; margin-left: -100px" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/profile">Profile</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" style="color: red;" href="/logout">Se Deconnecter</a>
+                        </div>
+                    </div>
+
+
+                    @else
+
+                    <a href="/card">
+
+                        <img style="width: 50px; float: right; margin-top: 0px" src="{{ asset('img/logo/bag.png') }}" alt="">
+
+                    </a>
+                    <a class="ml-4 " href="/profile" style="text-decoration: none; float: right; right: 0">
+                        <img style="height: 50px;" class="rounded-circle" src="{{ asset('img/user/username.gif') }}" alt="">
+
+
+                    </a>
+
+
+                    @endif
+
+
                 </div>
 
             </div>
@@ -438,12 +458,17 @@
 
 
     <div style="margin-top: 30px" class="main">
+        @if(Session::has('message'))
+        <p class="container alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+        @endif
 
         @yield('content')
 
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
