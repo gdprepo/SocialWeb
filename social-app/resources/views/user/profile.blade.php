@@ -11,7 +11,7 @@
         <div class="col-md-5 mx-auto mb-4">
             <div style="display: flex;" class="row">
                 <div class="col-4">
-                    <img style="height: 100px;" class="rounded-circle" src="{{ asset('img/user/username.gif') }}" alt="">
+                    <img style="height: 100px;" class="rounded-circle" src="{{  Auth::user()->avatar }}" alt="">
 
                 </div>
                 <div style=" text-align:center; display: flex; margin-left: -40px" class="col-6">
@@ -22,7 +22,8 @@
                 </div>
             </div>
 
-            <h4 class="mt-4" style="font-size: 20px;">Nom d'utilisateur <br> description...</h4>
+
+            <h4 class="mt-4" style="font-size: 20px;">{{ $user->name }} <br> description...</h4>
             <div class="card mt-4">
                 <div style="width: 100%;" class="card-header">
                     <div class="row">

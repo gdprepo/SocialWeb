@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use File;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Socialite\Facades\Socialite;
 
 class HomeController extends Controller
 {
@@ -31,8 +36,16 @@ class HomeController extends Controller
         return view('welcome');
     }
 
-    public function profile()
+    public function profile($id = null)
     {
-        return view('user.profile');
+        if ($id) {
+            $user = User::find($id);
+        } else {
+            $user = Auth::user();
+        }
+
+        return view('user.profile', [
+            'user' => $user,
+        ]);
     }
 }

@@ -422,7 +422,7 @@
 
                     <div class="dropdown">
                         <a style="color: #1a202c; text-decoration: none" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="ml-4 dropdown-toggle" href="/logout" style="text-decoration: none; float: right; right: 0">
-                            <img style="height: 50px;" class="rounded-circle" src="{{ asset('img/user/username.gif') }}" alt="">
+                            <img style="height: 50px;" class="rounded-circle" src="{{ Auth::check() ? Auth::user()->avatar : asset('img/user/username.gif')  }}" alt="">
                         </a>
                         <div style="float: left; left: 0; margin-left: -100px" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/profile">Profile</a>
@@ -440,7 +440,7 @@
 
                     </a>
                     <a class="ml-4 " href="/profile" style="text-decoration: none; float: right; right: 0">
-                        <img style="height: 50px;" class="rounded-circle" src="{{ asset('img/user/username.gif') }}" alt="">
+                        <img style="height: 50px;" class="rounded-circle" src="{{ Auth::check() ? Auth::user()->avatar : asset('img/user/username.gif') }}" alt="">
 
 
                     </a>

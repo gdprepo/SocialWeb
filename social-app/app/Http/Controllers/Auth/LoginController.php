@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Faker\Provider\Image;
 
 class LoginController extends Controller
 {
@@ -60,7 +62,7 @@ class LoginController extends Controller
         if ($findUser) {
             Auth::login($findUser);
 
-            Session::flash('message', 'Vous etes connecté '. $findUser->name .' !'); 
+            Session::flash('message', 'Vous etes connecté ' . $findUser->name . ' !');
 
 
             return redirect('/');
@@ -68,12 +70,15 @@ class LoginController extends Controller
             $user = new User();
             $user->name = $userSocial->name;
             $user->email = $userSocial->email;
+
+            $user->avatar = $userSocial->getAvatar();
+
             $user->password = bcrypt(123456);
             $user->save();
 
             Auth::login($user);
 
-            Session::flash('message', 'Bienvenue'. $user->name .'sur SocialApp !'); 
+            Session::flash('message', 'Bienvenue' . $user->name . 'sur SocialApp !');
 
             return redirect('/');
         }
