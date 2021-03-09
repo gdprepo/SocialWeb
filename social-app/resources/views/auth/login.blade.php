@@ -2,7 +2,6 @@
 
 @section('content')
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <style>
     html,
     body {
@@ -15,7 +14,7 @@
         max-width: 400px;
         padding: 15px;
         margin: 0 auto;
-        margin-top: -20px;
+        margin-top: -10px;
     }
 
     .form-signin .checkbox {
@@ -49,12 +48,12 @@
 </style>
 
 
-<div class="container">
-    <div style="text-align: center; background: #c7c7c73d; padding: 30px" class="form-signin">
+<div style="margin-top: 0;" class="container">
+    <div style="text-align: center; background: #c7c7c73d; padding: 40px" class="form-signin">
         <img class="mb-4 rounded-circle" src="{{ asset('img/user/username.gif') }}" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <a href="{{ route('login_fb') }}">
-            <button style="width: 100%" class="btn btn-lg btn-primary btn-block mb-4"><i class="fab fa-facebook-f"></i></button>
+            <button style="width: 100%" class="btn btn-lg btn-primary btn-block mb-2"><i class="fab fa-facebook-f"></i></button>
         </a>
         <button style="width: 100%" class="btn btn-lg btn-danger btn-block mb-4" type="submit"><i class="fab fa-google"></i></button>
     <form>

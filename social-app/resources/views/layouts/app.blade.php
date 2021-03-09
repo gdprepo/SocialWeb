@@ -390,9 +390,9 @@
             }
         }
     </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Nunito';
@@ -405,18 +405,19 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <a style="text-decoration: none;" href="/">
-            <span class="navbar-brand mb-0 h1 ml-4">SocialApp</span>
-            
+                <span class="navbar-brand mb-0 h1 ml-4">SocialApp</span>
+
             </a>
 
             <div class=" " style="margin-left: auto">
 
-                <div style="margin: 10px; display:flex">
+                <div style="margin: 10px; display:flex; align-items: center">
                     @if (Auth::check())
 
                     <a href="/card">
 
-                        <img style="width: 50px; float: right; margin-top: 0px" src="{{ asset('img/logo/bag.png') }}" alt="">
+                    <i style="color: black; font-size: 44px; margin-right: 5px" class="fas fa-shopping-bag"></i>
+                        <span style="margin-left: -16px; padding: 5px" class="badge badge-primary">0</span>
 
                     </a>
 
@@ -435,8 +436,8 @@
                     @else
 
                     <a href="/card">
-
-                        <img style="width: 50px; float: right; margin-top: 0px" src="{{ asset('img/logo/bag.png') }}" alt="">
+                        <i style="color: black; font-size: 44px; margin-right: 5px" class="fas fa-shopping-bag"></i>
+                        <span style="margin-left: -16px; padding: 5px" class="badge badge-primary">0</span>
 
                     </a>
                     <a class="ml-4 " href="/profile" style="text-decoration: none; float: right; right: 0">

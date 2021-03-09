@@ -8,7 +8,7 @@
 <div class="container">
     <div style="display:grid;" class="row">
 
-        <div class="col-md-5 mx-auto mb-4">
+        <div class="col-md-7 mx-auto mb-4">
             <div style="display: flex;" class="row">
                 <div class="col-4">
                     <img style="height: 100px;" class="rounded-circle" src="{{  Auth::user()->avatar }}" alt="">
