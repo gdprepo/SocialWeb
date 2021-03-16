@@ -4,7 +4,9 @@
 
 @section('content')
 
-<?php use App\Models\User; ?>
+<?php
+
+use App\Models\User; ?>
 
 <div class="container">
     <div style="display:grid;" class="row">
@@ -16,8 +18,11 @@
                     <div class="row">
 
                         <div style="display: flex; justify-content: center; align-items: center; padding: 0" class="col-6">
-                            <img style="height: 44px;" class="rounded-circle" src="{{ User::find($post->user_id)->avatar }}" alt="">
-                            <p class="ml-4" style="text-align: left; margin-top: 15px;">{{ User::find($post->user_id)->name }}</p>
+                            <a style="display: flex; text-decoration: none; color: black; justify-content: center; align-items: center " href="{{ route('profile', $post->user_id) }}">
+                                <img style="height: 44px;" class="rounded-circle" src="{{ User::find($post->user_id)->avatar }}" alt="">
+                                <p class="ml-4" style="text-align: left; margin-top: 15px;">{{ User::find($post->user_id)->name }}</p>
+                            </a>
+
                         </div>
                         <div style="display:flex; justify-content: center; align-items: center; margin: 0; padding: 0" class="col-5">
                             <p style="text-align: right; margin-left: auto" class="card-text">Bordeaux, France</p>
@@ -67,7 +72,7 @@
             </div>
 
         </div>
-        
+
         <div class="col-md-5 mx-auto mb-4">
             <div class="card">
                 <div class="card-header">
