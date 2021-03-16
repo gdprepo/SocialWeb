@@ -35,6 +35,7 @@ use App\Models\User; ?>
                 <img style="width: 100%;" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="card-text">{{ $post->title }}</p>
+                    <p class="card-text">{{ $post->hashtags }}</p>
                 </div>
             </div>
 

@@ -5,6 +5,8 @@
 @section('content')
 
 <style>
+    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
     .image-preview {
         width: 100%;
         min-height: 100px;
@@ -24,6 +26,47 @@
         width: 100%;
 
     }
+
+    .tag-container {
+        border: 2px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .tag-container span {
+        font-size: 14px;
+    }
+    .tag-container .tag {
+        padding: 5px;
+        border: 1px solid #ccc;
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        background: #f2f2f2;
+        cursor: default;
+    }
+
+    .tag i {
+        font: 10px;
+        margin-left: 5px;
+
+    }
+
+    .tag-container input {
+        flex: 1;
+        font-size: 14px;
+        padding: 5px;
+        outline: none;
+        border: 0;
+    } 
+
+    .fix {
+        display: flex;
+    }
 </style>
 
 
@@ -35,7 +78,7 @@
 
             <div class="form-group">
                 <div class="input-group mb-3">
-                    <input type="text" name="title" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" name="title" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1" required>
                 </div>
 
 
@@ -45,6 +88,18 @@
                     <img src="" alt="" class="image-preview__image">
                     <span class="image-preview__default-text">Image Preview</span>
                 </div>
+
+
+
+                <div style="margin-top: 30px" class="input-group mb-3">
+                    <input name="send" id="send" type="hidden">
+
+                    <div style="margin: 0;" class="tag-container row">
+
+                        <input name="hashtags" type="text">
+                    </div>
+            
+                </div>                
 
 
 
@@ -97,6 +152,67 @@
             });
 
             reader.readAsDataURL(file);
+        }
+    })
+
+    const tagContainer = document.querySelector('.tag-container');
+
+    const input = document.querySelector('.tag-container input')
+
+    var tags = [];
+
+    function createTag(label) {
+        const div = document.createElement('div');
+        div.setAttribute('class', 'col-3 fix');
+        const div2 = document.createElement('div');
+        div2.setAttribute('class', 'tag');
+        const span = document.createElement('span');
+        span.innerHTML = label;
+        const closeBtn = document.createElement('i');
+        closeBtn.setAttribute('class', 'material-icons');
+        closeBtn.setAttribute('data-item', label);
+        closeBtn.innerHTML = "close";
+
+        div.appendChild(span);
+        div.appendChild(closeBtn);
+        div2.appendChild(div);
+
+        return div2;
+    }
+
+    function reset() {
+        document.querySelectorAll('.tag').forEach(function(tag) {
+            tag.parentElement.removeChild(tag);
+        })
+    }
+
+    function addTags() {
+        const send = document.getElementById('send');
+
+        reset();
+        tags.slice().reverse().forEach(function(tag) {
+            const input = createTag(tag);
+            tagContainer.prepend(input);
+        })
+
+        send.value = tags;
+        console.log(send.value);
+    }
+
+    input.addEventListener('keyup', function(e) {
+        if (e.key === ' ') {
+            tags.push(input.value);
+            addTags();
+            input.value = '';
+        }
+    })
+
+    document.addEventListener('click', function(e) {
+        if (e.target.tagName === "I") {
+            const value = e.target.getAttribute('data-item');
+            const index = tags.indexOf(value);
+            tags = [...tags.slice(0, index), ...tags.slice(index +1)];
+            addTags();
         }
     })
 </script>

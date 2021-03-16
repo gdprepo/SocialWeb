@@ -84,6 +84,11 @@ class HomeController extends Controller
 
         $post->title = $request->input('title');
 
+        if ($request->input('send')) {
+            $post->hashtags = json_encode( explode(',', $request->input('send')));
+
+            
+        }
 
         $post->save();
 
