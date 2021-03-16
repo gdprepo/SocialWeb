@@ -18,7 +18,7 @@ use App\Models\User; ?>
                     <div class="row">
 
                         <div style="display: flex; justify-content: center; align-items: center; padding: 0" class="col-6">
-                            <a style="display: flex; text-decoration: none; color: black; justify-content: center; align-items: center " href="{{ route('profile', $post->user_id) }}">
+                            <a style="display: flex; text-decoration: none; color: black; justify-content: center; align-items: center; margin-right: auto; margin-left: 8% " href="{{ route('profile', $post->user_id) }}">
                                 <img style="height: 44px;" class="rounded-circle" src="{{ User::find($post->user_id)->avatar }}" alt="">
                                 <p class="ml-4" style="text-align: left; margin-top: 15px;">{{ User::find($post->user_id)->name }}</p>
                             </a>
