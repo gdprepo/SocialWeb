@@ -44,6 +44,14 @@
 
                 </div>
                 <div style="text-align: center; width: 100%; margin-left :0" class="row">
+                    @foreach($posts as $post)
+                    <div style="padding: 0; align-items: center; justify-content: center; height: 315px;" class="col-6">
+                    <img style="width: 100%; height: calc(100vw * 0.22);" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
+                    
+                    </div>
+
+
+                    @endforeach
                     <div style="padding: 0;" class="col-6">
                     <img style="width: 100%;" src="https://via.placeholder.com/300.png/09f/fff" class="card-img-top" alt="...">
                     
@@ -52,6 +60,7 @@
                     <img style="width: 100%;" src="https://via.placeholder.com/300.png/09f/fff" class="card-img-top" alt="...">
                     
                     </div>
+                    
                 
                 
                 </div>

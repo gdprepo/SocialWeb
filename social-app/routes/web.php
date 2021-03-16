@@ -26,8 +26,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/profile/{id?}', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
+Route::get('/post/add', [App\Http\Controllers\HomeController::class, 'postAdd'])->name('post.add');
+
+Route::post('/post/add/store', [App\Http\Controllers\HomeController::class, 'postStore'])->name('post.add');
+
+
+
+
+
+
+
 Route::get('login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider'])->name('login_fb');
 Route::get('login/facebook/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback']);
+
+Route::get('auth/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback']);
+
+
 
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 

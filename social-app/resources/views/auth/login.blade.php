@@ -55,7 +55,10 @@
         <a href="{{ route('login_fb') }}">
             <button style="width: 100%" class="btn btn-lg btn-primary btn-block mb-2"><i class="fab fa-facebook-f"></i></button>
         </a>
+        <a href="{{ url('auth/google') }}">
         <button style="width: 100%" class="btn btn-lg btn-danger btn-block mb-4" type="submit"><i class="fab fa-google"></i></button>
+
+        </a>
     <form>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">

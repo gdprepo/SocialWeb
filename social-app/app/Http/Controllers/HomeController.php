@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use File;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,12 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        return view('welcome');
+        $posts = Post::all();
+
+    
+        return view('welcome', [
+            'posts' => $posts,
+        ]);
     }
 
     public function profile($id = null)
@@ -44,8 +50,44 @@ class HomeController extends Controller
             $user = Auth::user();
         }
 
+        $posts = Post::all();
+
+
         return view('user.profile', [
             'user' => $user,
+            'posts' => $posts
         ]);
+    }
+
+    public function postAdd()
+    {
+        $user = Auth::user();
+
+        return view('post.add', [
+            'user' => $user,
+        ]);
+    }
+
+    public function postStore(Request $request)
+    {
+        $user = Auth::user();
+
+        $post = new Post();
+        $post->user_id = $user->id;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalName();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path() . '/uploads/post/', $filename);
+            $post->image = $filename;
+        }
+
+        $post->title = $request->input('title');
+
+
+        $post->save();
+
+
+        return redirect()->route('welcome')->with('message', 'Vous avez créé un post !');
     }
 }
