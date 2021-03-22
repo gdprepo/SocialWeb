@@ -45,8 +45,7 @@
                 </div>
                 <div style="text-align: center; width: 100%; margin-left :0" class="row">
                     @foreach($posts as $post)
-                    <div style="padding: 0; align-items: center; justify-content: center; height: 315px; min-height: 250px" class="col-6">
-                    <img style="width: 100%; height: calc(100vw * 0.22); max-height: 315px; min-height: 250px" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
+                    <div style="height: calc(100vw * 0.22); max-height: 315px; min-height: 200px ;background-size: cover; background-repeat: no-repeat ;padding: 0; align-items: center; justify-content: center; min-height: 250px; background-image: url('<?php echo asset('uploads/post/' .$post->image) ?>')" class="col-6">
                     
                     </div>
 

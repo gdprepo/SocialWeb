@@ -50,7 +50,7 @@ class HomeController extends Controller
             $user = Auth::user();
         }
 
-        $posts = Post::where('user_id', '=', $user->id)->get();
+        $posts = Post::where('user_id', '=', $user->id)->orderBy('id', 'DESC')->get();
 
 
         return view('user.profile', [
