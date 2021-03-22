@@ -89,19 +89,13 @@ function format($datetime)
                     <div class="card-body">
                         <div style="float:left; left: 0; justify-content: center; align-items: center; width: 100%; text-align: left">
                             <div style="margin-right: auto">
-                                @if($hash)
-                                <form action="{{ route('posts.like', $hash) }}" id="form-js">
-
-                                @else 
-                                <form action="{{ route('posts.like') }}" id="form-js">
-
-                                @endif
+                                <form action="{{ route('postsHash.like', $hash) }}" id="form-js">
                                     <input type="hidden" id="post-id-js" value="{{ $post->id }}">
 
                                     @if($post->isLikedByLoggedInUser())
                                     <button id="{{ $post->id }}" type="submit" style="padding: 0;" class="btn btn-link like"><i style="color: red; font-size: x-large" class="fas fa-heart"></i> </button>
                                     @else
-                                    <button id="{{ $post->id }}" type="submit" style="padding: 0;" class="btn btn-link like"><i style="color: grey; font-size: x-large" class="fas fa-heart"></i> </button>
+                                    <button id="{{ $post->id }}" type="submit" style="padding: 0;" class="btn btn-link"><i style="color: grey; font-size: x-large" class="fas fa-heart"></i> </button>
                                     @endif
 
                                     <div id="count-js">

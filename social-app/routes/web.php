@@ -24,7 +24,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'welcome'])->name('
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/posts/{hashtag}', [App\Http\Controllers\HomeController::class, 'postHashtag'])->name('postHashtag');
+Route::get('/{hashtag?}', [App\Http\Controllers\HomeController::class, 'postHashtag'])->name('postHashtag');
 
 
 Route::get('/profile/{id?}', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
@@ -36,6 +36,8 @@ Route::post('/post/add/store', [App\Http\Controllers\HomeController::class, 'pos
 
 
 Route::post('/like', [App\Http\Controllers\PostController::class, 'like'])->name('posts.like');
+//Route::post('/posts/{hashtag}/like', [App\Http\Controllers\PostController::class, 'like'])->name('postsHash.like');
+
 
 
 
@@ -50,5 +52,5 @@ Route::get('auth/google/callback', [App\Http\Controllers\GoogleController::class
 
 
 
-Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/user/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 

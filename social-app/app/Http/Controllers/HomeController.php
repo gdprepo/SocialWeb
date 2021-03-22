@@ -39,18 +39,20 @@ class HomeController extends Controller
     
         return view('welcome', [
             'posts' => $posts,
-            'users' => $users
+            'users' => $users,
+            'hash' => ""
         ]);
     }
 
     public function postHashtag($hashtag)
     {
-        $posts = Post::orderBy('id', 'DESC')->whereJsonContains('hashtags', $hashtag)->get();
+        $posts = Post::orderBy('id', 'DESC')->where('hashtags','like','%'.$hashtag.'%')->get();
         $users = User::all();
     
         return view('welcome', [
             'posts' => $posts,
-            'users' => $users
+            'users' => $users,
+            'hash' => $hashtag
         ]);
     }
 
