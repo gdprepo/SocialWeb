@@ -23,4 +23,15 @@ class Post extends Model
         'comments',
         'user_id'
     ];
+
+
+    public function likes()
+    {
+        return $this->hasMany('App\Models\Like');
+    }
+
+    public function isLikedByLoggedInUser()
+    {
+        return $this->likes->where('user_id', auth()->user()->id)->isEmpty() ? false : true;
+    }
 }

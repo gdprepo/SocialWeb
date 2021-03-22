@@ -32,6 +32,9 @@ Route::post('/post/add/store', [App\Http\Controllers\HomeController::class, 'pos
 
 
 
+Route::post('/like', [App\Http\Controllers\PostController::class, 'like'])->name('posts.like');
+
+
 
 
 

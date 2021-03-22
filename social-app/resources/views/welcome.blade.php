@@ -85,7 +85,28 @@ function format($datetime)
 
                     <img style="width: 100%;" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <p class="card-text">{{ $post->title }}</p>
+                        <div style="float:left; left: 0; justify-content: center; align-items: center; width: 100%; text-align: left">
+                            <div style="margin-right: auto">
+                                <form action="{{ route('posts.like') }}" id="form-js">
+                                    <input type="hidden" id="post-id-js" value="{{ $post->id }}">
+                                    
+                                    @if($post->isLikedByLoggedInUser())
+                                    <button type="submit" style="padding: 0;" class="btn btn-link"><i style="color: red; font-size: x-large" class="fas fa-heart"></i> </button>
+                                    @else
+                                    <button type="submit" style="padding: 0;" class="btn btn-link"><i style="color: grey; font-size: x-large" class="fas fa-heart"></i> </button>
+                                    @endif
+                                    
+                                    <div id="count-js">
+                                        {{ $post->likes->count() }} J'aime
+                                    </div>
+
+                                </form>
+
+
+                            </div>
+
+                        </div>
+                        <p class="card-text"><a style="text-decoration: none; color: black" href="{{ route('profile', $post->user_id) }}"><strong>{{ User::find($post->user_id)->name }}</strong> </a>{{ $post->title }}</p>
                         <p class="card-text">{{ $post->hashtags }}</p>
                         <p class="card-text" style="color:grey; font-size: 14px;float: left; left: 0">{{ format($post->created_at) }}</p>
 
@@ -109,17 +130,17 @@ function format($datetime)
                 </a>
 
                 <div class="mt-4" style="margin-left: 0%">
-                    <h4 style="font-size: 15px; color: grey">Suggestions pour vous</h4>            
-                </div>       
-            
+                    <h4 style="font-size: 15px; color: grey">Suggestions pour vous</h4>
+                </div>
+
             </div>
-  
+
 
 
         </div>
 
 
-
+        <!--
 
         <div class="col-md-5 mx-auto mb-4">
             <div class="card">
@@ -181,7 +202,7 @@ function format($datetime)
 
         </div>
 
-
+-->
     </div>
 
 
