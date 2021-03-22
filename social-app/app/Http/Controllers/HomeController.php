@@ -35,10 +35,22 @@ class HomeController extends Controller
     public function welcome()
     {
         $posts = Post::orderBy('id', 'DESC')->get();
-
+        $users = User::all();
     
         return view('welcome', [
             'posts' => $posts,
+            'users' => $users
+        ]);
+    }
+
+    public function postHashtag($hashtag)
+    {
+        $posts = Post::orderBy('id', 'DESC')->whereJsonContains('hashtags', $hashtag)->get();
+        $users = User::all();
+    
+        return view('welcome', [
+            'posts' => $posts,
+            'users' => $users
         ]);
     }
 
@@ -86,8 +98,10 @@ class HomeController extends Controller
 
         if ($request->input('send')) {
             $post->hashtags = json_encode( explode(',', $request->input('send')));
+        }
 
-            
+        if ($request->input('location')) {
+            $post->location = $request->input('location');
         }
 
         $post->save();

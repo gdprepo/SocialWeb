@@ -81,6 +81,10 @@
                     <input type="text" name="title" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1" required>
                 </div>
 
+                <div class="input-group mb-3">
+                    <input type="text" name="location" class="form-control" placeholder="Lieux" aria-label="Username" aria-describedby="basic-addon1" required>
+                </div>
+
 
                 <label for="exampleFormControlFile1">Example file input</label>
                 <input id="inpFile" name="image" type="file" class="form-control-file" id="exampleFormControlFile1">

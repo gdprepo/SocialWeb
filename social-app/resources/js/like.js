@@ -1,4 +1,22 @@
 const forms = document.querySelectorAll('#form-js');
+const imgs = document.querySelectorAll('.img-post');
+const btns = document.querySelectorAll('.like');
+
+imgs.forEach(img => {
+    img.addEventListener('dblclick', function (e) {
+        e.preventDefault();
+        // console.log(forms[img.class])
+        btns.forEach(btn => {
+            if (btn.getAttribute('id') == img.getAttribute('id')) {
+                console.log("coucou")
+                btn.click()
+            }
+        
+        })
+
+
+    })
+});
 
 forms.forEach(form => {
     form.addEventListener('submit', function (e) {
@@ -38,3 +56,5 @@ forms.forEach(form => {
         })
     })
 });
+
+// object.addEventListener("dblclick", myScript);

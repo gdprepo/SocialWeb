@@ -24,6 +24,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'welcome'])->name('
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/posts/{hashtag}', [App\Http\Controllers\HomeController::class, 'postHashtag'])->name('postHashtag');
+
+
 Route::get('/profile/{id?}', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
 Route::get('/post/add', [App\Http\Controllers\HomeController::class, 'postAdd'])->name('post.add');

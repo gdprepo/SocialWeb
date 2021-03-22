@@ -9,7 +9,7 @@
     <div style="display:grid;" class="row">
 
         <div class="col-md-7 mx-auto mb-4">
-            <div style="display: flex;" class="row">
+            <div style="display: flex;" class="row ml-2">
                 <div class="col-4">
                     <img style="height: 100px;" class="rounded-circle" src="{{  $user->avatar }}" alt="">
 
@@ -23,7 +23,7 @@
             </div>
 
 
-            <h4 class="mt-4" style="font-size: 20px;">{{ $user->name }} <br> description...</h4>
+            <h4 class="mt-4 ml-4" style="font-size: 20px;">{{ $user->name }} <br> description...</h4>
             <div class="card mt-4">
                 <div style="width: 100%;" class="card-header">
                     <div class="row">

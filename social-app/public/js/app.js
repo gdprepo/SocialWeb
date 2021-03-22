@@ -80,6 +80,20 @@ __webpack_require__(/*! ./like.js */ "./resources/js/like.js");
 /***/ (() => {
 
 var forms = document.querySelectorAll('#form-js');
+var imgs = document.querySelectorAll('.img-post');
+var btns = document.querySelectorAll('.like');
+imgs.forEach(function (img) {
+  img.addEventListener('dblclick', function (e) {
+    e.preventDefault(); // console.log(forms[img.class])
+
+    btns.forEach(function (btn) {
+      if (btn.getAttribute('id') == img.getAttribute('id')) {
+        console.log("coucou");
+        btn.click();
+      }
+    });
+  });
+});
 forms.forEach(function (form) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -112,7 +126,7 @@ forms.forEach(function (form) {
       console.log(error);
     });
   });
-});
+}); // object.addEventListener("dblclick", myScript);
 
 /***/ }),
 
