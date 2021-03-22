@@ -21,7 +21,8 @@ class PostController extends Controller
 
             if ($res) {
                 return response()->json([
-                    'count' => Post::find(request()->id)->likes->count()
+                    'count' => Post::find(request()->id)->likes->count(),
+                    'check' => true
                 ]);
             }
         } else {
@@ -31,9 +32,9 @@ class PostController extends Controller
 
             $like->save();
 
-
             return response()->json([
-                'count' => Post::find(request()->id)->likes->count()
+                'count' => Post::find(request()->id)->likes->count(),
+                'check' => false
             ]);
         }
     }

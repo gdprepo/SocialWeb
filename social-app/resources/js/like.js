@@ -8,22 +8,30 @@ forms.forEach(form => {
         const token = document.querySelector('meta[name="csrf-token"]').content;
         const postId = this.querySelector('#post-id-js').value;
         const count = this.querySelector('#count-js');
+        const like = this.querySelector('.fa-heart');
 
 
-        console.log(count);
+        console.log(like);
 
         fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': token
             },
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({
                 id: postId
             })
         }).then(response => {
             response.json().then(data => {
-                count.innerHtml = data.count;
+                count.innerHTML = data.count + " J'aime";
+                if( data.check == true) {
+                    like.style.color = "grey"
+
+                } else {
+                    like.style.color = "red"
+
+                }
             })
         }).catch(error => {
             console.log(error)

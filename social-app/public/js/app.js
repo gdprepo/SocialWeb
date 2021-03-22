@@ -87,19 +87,26 @@ forms.forEach(function (form) {
     var token = document.querySelector('meta[name="csrf-token"]').content;
     var postId = this.querySelector('#post-id-js').value;
     var count = this.querySelector('#count-js');
-    console.log(count);
+    var like = this.querySelector('.fa-heart');
+    console.log(like);
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': token
       },
-      method: 'post',
+      method: 'POST',
       body: JSON.stringify({
         id: postId
       })
     }).then(function (response) {
       response.json().then(function (data) {
-        count.innerHtml = data.count;
+        count.innerHTML = data.count + " J'aime";
+
+        if (data.check == true) {
+          like.style.color = "grey";
+        } else {
+          like.style.color = "red";
+        }
       });
     })["catch"](function (error) {
       console.log(error);
