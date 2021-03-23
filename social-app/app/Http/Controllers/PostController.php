@@ -38,4 +38,14 @@ class PostController extends Controller
             ]);
         }
     }
+
+    public function postShow($id)
+    {
+        $post = Post::find($id);
+
+        return view('post.show', [
+            'post' => $post,
+            'hash' => ""
+        ]);
+    }
 }

@@ -27,7 +27,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/{hashtag?}', [App\Http\Controllers\HomeController::class, 'postHashtag'])->name('postHashtag');
 
 
-Route::get('/profile/{id?}', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+Route::get('/profile/info/{id?}', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+
+Route::get('/post/show/{id}', [App\Http\Controllers\PostController::class, 'postShow'])->name('post.show');
+
 
 Route::get('/post/add', [App\Http\Controllers\HomeController::class, 'postAdd'])->name('post.add');
 
@@ -36,6 +39,8 @@ Route::post('/post/add/store', [App\Http\Controllers\HomeController::class, 'pos
 
 
 Route::post('/like', [App\Http\Controllers\PostController::class, 'like'])->name('posts.like');
+Route::post('/post/show/like', [App\Http\Controllers\PostController::class, 'like'])->name('postShow.like');
+
 //Route::post('/posts/{hashtag}/like', [App\Http\Controllers\PostController::class, 'like'])->name('postsHash.like');
 
 

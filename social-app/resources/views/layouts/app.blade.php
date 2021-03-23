@@ -428,7 +428,7 @@
                             <img style="height: 50px;" class="rounded-circle" src="{{ Auth::check() ? Auth::user()->avatar : asset('img/user/username.gif')  }}" alt="">
                         </a>
                         <div style="float: left; left: 0; margin-left: -100px" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="/profile">Profile</a>
+                            <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
                             <a class="dropdown-item" href="/post/add">Ajouter un Post</a>
                             <a class="dropdown-item" style="color: red;" href="{{ route('logout') }}">Se Deconnecter</a>
                         </div>

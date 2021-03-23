@@ -45,10 +45,12 @@
                 </div>
                 <div style="text-align: center; width: 100%; margin-left :0" class="row">
                     @foreach($posts as $post)
-                    <div style="height: calc(100vw * 0.22); max-height: 315px; min-height: 200px ;background-size: cover; background-repeat: no-repeat ;padding: 0; align-items: center; justify-content: center; min-height: 250px; background-image: url('<?php echo asset('uploads/post/' .$post->image) ?>')" class="col-6">
+    
+                    <div onclick="window.location='{{ route("post.show", $post->id) }}'" style="height: calc(100vw * 0.22); max-height: 315px; min-height: 200px ;background-size: cover; background-repeat: no-repeat ;padding: 0; align-items: center; justify-content: center; min-height: 250px; background-image: url('<?php echo asset('uploads/post/' .$post->image) ?>')" class="col-6">
                     
                     </div>
-
+          
+                    
 
                     @endforeach
                     <div style="padding: 0; align-items: center; justify-content: center; height: 315px; min-height: 250px"  class="col-6">
