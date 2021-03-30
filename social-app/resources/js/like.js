@@ -28,12 +28,10 @@ forms.forEach(form => {
         const count = this.querySelector('#count-js');
         const like = this.querySelector('.fa-heart');
 
-
-        console.log(like);
-
         fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': token
             },
             method: 'POST',

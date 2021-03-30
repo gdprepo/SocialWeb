@@ -30,4 +30,6 @@ const app = new Vue({
     el: '#app',
 });
 
+require('./bootstrap')
 require('./like.js');
+

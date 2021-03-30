@@ -44,6 +44,7 @@ Route::post('/post/show/like', [App\Http\Controllers\PostController::class, 'lik
 //Route::post('/posts/{hashtag}/like', [App\Http\Controllers\PostController::class, 'like'])->name('postsHash.like');
 
 
+Route::get('/notifications/all', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notifications');
 
 
 

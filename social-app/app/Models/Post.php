@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Notifications\PostLiked;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -24,11 +26,15 @@ class Post extends Model
         'user_id'
     ];
 
+    public $post;
+
 
     public function likes()
     {
         return $this->hasMany('App\Models\Like');
     }
+
+
 
     public function isLikedByLoggedInUser()
     {

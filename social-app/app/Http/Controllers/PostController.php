@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use App\Models\Post;
-use Illuminate\Http\JsonResponse;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Notifications\PostLiked;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function like(): JsonResponse
     {
+
+
+
         $post = Post::find(request()->id);
 
         if ($post->isLikedByLoggedInUser()) {
@@ -26,6 +32,11 @@ class PostController extends Controller
                 ]);
             }
         } else {
+            // $user_id = Post::find(request()->id)->user_id;
+
+            User::find($post->user_id)->notify(new PostLiked($post));
+
+            
             $like = new Like();
             $like->user_id = auth()->user()->id;
             $like->post_id = request()->id;

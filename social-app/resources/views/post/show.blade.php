@@ -81,7 +81,7 @@ function format($datetime)
                         <div style="float:left; left: 0; justify-content: center; align-items: center; width: 100%; text-align: left">
                             <div style="margin-right: auto">
 
-                                    <form action="{{ route('postShow.like') }}" id="form-js">
+                                    <form action="{{ route('posts.like') }}" id="form-js">
 
                     
                                         <input type="hidden" id="post-id-js" value="{{ $post->id }}">

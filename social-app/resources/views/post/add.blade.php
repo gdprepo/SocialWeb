@@ -39,6 +39,7 @@
     .tag-container span {
         font-size: 14px;
     }
+
     .tag-container .tag {
         padding: 5px;
         border: 1px solid #ccc;
@@ -62,7 +63,7 @@
         padding: 5px;
         outline: none;
         border: 0;
-    } 
+    }
 
     .fix {
         display: flex;
@@ -78,13 +79,8 @@
 
             <div class="form-group">
                 <div class="input-group mb-3">
-                    <input type="text" name="title" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1" required>
+                    <input type="text" name="title" class="form-control" placeholder="Title *" aria-label="Username" aria-describedby="basic-addon1" required>
                 </div>
-
-                <div class="input-group mb-3">
-                    <input type="text" name="location" class="form-control" placeholder="Lieux" aria-label="Username" aria-describedby="basic-addon1" required>
-                </div>
-
 
                 <label for="exampleFormControlFile1">Example file input</label>
                 <input id="inpFile" name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
@@ -93,6 +89,12 @@
                     <span class="image-preview__default-text">Image Preview</span>
                 </div>
 
+                <label class="input-group mb-3 mt-4">
+                    <!-- Avoid the word "address" in id, name, or label text to avoid browser autofill from conflicting with Place Autocomplete. Star or comment bug https://crbug.com/587466 to request Chromium to honor autocomplete="off" attribute. -->
+             
+                    <input class="form-control" id="ship-address" name="location" required autocomplete="off" />
+                </label>
+
 
 
                 <div style="margin-top: 30px" class="input-group mb-3">
@@ -100,10 +102,10 @@
 
                     <div style="margin: 0;" class="tag-container row">
 
-                        <input name="hashtags" type="text">
+                        <input placeholder="Tags" name="hashtags" type="text">
                     </div>
-            
-                </div>                
+
+                </div>
 
 
 
@@ -215,10 +217,95 @@
         if (e.target.tagName === "I") {
             const value = e.target.getAttribute('data-item');
             const index = tags.indexOf(value);
-            tags = [...tags.slice(0, index), ...tags.slice(index +1)];
+            tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
             addTags();
         }
     })
+
+
+    // This sample uses the Places Autocomplete widget to:
+// 1. Help the user select a place
+// 2. Retrieve the address components associated with that place
+// 3. Populate the form fields with those address components.
+// This sample requires the Places library, Maps JavaScript API.
+// Include the libraries=places parameter when you first load the API.
+// For example: <script
+// src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+let autocomplete;
+let address1Field;
+let address2Field;
+let postalField;
+
+function initAutocomplete() {
+  address1Field = document.querySelector("#ship-address");
+  address2Field = document.querySelector("#address2");
+  postalField = document.querySelector("#postcode");
+  // Create the autocomplete object, restricting the search predictions to
+  // addresses in the US and Canada.
+  autocomplete = new google.maps.places.Autocomplete(address1Field, {
+    componentRestrictions: { country: ["us", "ca"] },
+    fields: ["address_components", "geometry"],
+    types: ["address"],
+  });
+  address1Field.focus();
+  // When the user selects an address from the drop-down, populate the
+  // address fields in the form.
+  autocomplete.addListener("place_changed", fillInAddress);
+}
+
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  const place = autocomplete.getPlace();
+  let address1 = "";
+  let postcode = "";
+
+  // Get each component of the address from the place details,
+  // and then fill-in the corresponding field on the form.
+  // place.address_components are google.maps.GeocoderAddressComponent objects
+  // which are documented at http://goo.gle/3l5i5Mr
+  for (const component of place.address_components) {
+    const componentType = component.types[0];
+
+    switch (componentType) {
+      case "street_number": {
+        address1 = `${component.long_name} ${address1}`;
+        break;
+      }
+
+      case "route": {
+        address1 += component.short_name;
+        break;
+      }
+
+      case "postal_code": {
+        postcode = `${component.long_name}${postcode}`;
+        break;
+      }
+
+      case "postal_code_suffix": {
+        postcode = `${postcode}-${component.long_name}`;
+        break;
+      }
+      case "locality":
+        document.querySelector("#locality").value = component.long_name;
+        break;
+
+      case "administrative_area_level_1": {
+        document.querySelector("#state").value = component.short_name;
+        break;
+      }
+      case "country":
+        document.querySelector("#country").value = component.long_name;
+        break;
+    }
+  }
+  address1Field.value = address1;
+  postalField.value = postcode;
+  // After filling the form with address components from the Autocomplete
+  // prediction, set cursor focus on the second address line to encourage
+  // entry of subpremise information such as apartment, unit, or floor number.
+  address2Field.focus();
+}
 </script>
 
 

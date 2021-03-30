@@ -6,6 +6,8 @@ use File;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Notifications\PostLiked;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
@@ -30,6 +32,15 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function notifications()
+    {
+        $notifs = auth()->user()->unreadNotifications;
+
+        return view('user.notifications', [
+            'notificaitons' => $notifs
+        ]);
     }
 
     public function welcome()
