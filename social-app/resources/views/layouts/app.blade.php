@@ -418,13 +418,13 @@
 
                 <div style="margin: 10px; display:flex; align-items: center">
                     @if (Auth::check())
-
+                <!--
                     <a href="{{ route('notifications') }}">
 
 
                         <i style="font-size: 40px; color: blue" class="fas fa-bell mr-4">
                             <span class="badge badge-primary" style="color: white; font-size: 15px; margin-left: -18px;" id="js-count">{{ auth()->user()->unreadNotifications->count() }}</span></i>
-                    </a>
+                    </a> -->
 
                     <a href="/card">
 
@@ -434,12 +434,15 @@
                     </a>
 
                     <div class="dropdown">
-                        <a style="color: #1a202c; text-decoration: none" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="ml-4 dropdown-toggle" href="/logout" style="text-decoration: none; float: right; right: 0">
+                        <a style="color: #1a202c; text-decoration: none" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="ml-4" style="text-decoration: none; float: right; right: 0">
                             <img style="height: 50px;" class="rounded-circle" src="{{ Auth::check() ? Auth::user()->avatar : asset('img/user/username.gif')  }}" alt="">
+                            <span class="badge badge-primary" style="color: white; font-size: 15px; margin-left: -18px; margin-bottom: -30px" id="js-count">{{ auth()->user()->unreadNotifications->count() }}</span></i>
+                        
                         </a>
                         <div style="float: left; left: 0; margin-left: -100px" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
                             <a class="dropdown-item" href="/post/add">Ajouter un Post</a>
+                            <a class="dropdown-item" style="color: blue;" href="{{ route('notifications') }}">Notifications <span style="color: blue" id="js-count">- {{ auth()->user()->unreadNotifications->count() }} </span></a>
                             <a class="dropdown-item" style="color: red;" href="{{ route('logout') }}">Se Deconnecter</a>
                         </div>
                     </div>

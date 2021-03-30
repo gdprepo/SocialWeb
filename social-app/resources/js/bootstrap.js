@@ -44,7 +44,22 @@ console.log(User.id)
 window.Echo.private('App.Models.User.'+window.User.id)
 .notification((notification) => {
     console.log(notification.type);
-    document.getElementById('js-count').innerHTML = parseInt(document.getElementById('js-count').innerHTML) + 1
+    const counts = document.querySelectorAll('#js-count');
+    console.log(counts)
+    var index = 0;
+    counts.forEach((e) => {
+        if (index == 0) {
+            e.innerHTML = parseInt(document.getElementById('js-count').innerHTML) + 1
+        } else {
+            e.innerHTML = "- " + parseInt(document.getElementById('js-count').innerHTML)
+        }
+
+        index++;
+
+
+    })
+    
+    
 });
 
     

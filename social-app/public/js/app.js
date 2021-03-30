@@ -1954,7 +1954,18 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
 console.log(User.id);
 window.Echo["private"]('App.Models.User.' + window.User.id).notification(function (notification) {
   console.log(notification.type);
-  document.getElementById('js-count').innerHTML = parseInt(document.getElementById('js-count').innerHTML) + 1;
+  var counts = document.querySelectorAll('#js-count');
+  console.log(counts);
+  var index = 0;
+  counts.forEach(function (e) {
+    if (index == 0) {
+      e.innerHTML = parseInt(document.getElementById('js-count').innerHTML) + 1;
+    } else {
+      e.innerHTML = "- " + parseInt(document.getElementById('js-count').innerHTML);
+    }
+
+    index++;
+  });
 });
 
 /***/ }),

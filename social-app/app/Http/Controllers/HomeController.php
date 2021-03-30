@@ -37,9 +37,11 @@ class HomeController extends Controller
     public function notifications()
     {
         $notifs = auth()->user()->unreadNotifications;
+        $notifsOld = auth()->user()->readNotifications;
 
         return view('user.notifications', [
-            'notificaitons' => $notifs
+            'notificaitons' => $notifs,
+            'notificaitons_old' => $notifsOld
         ]);
     }
 
