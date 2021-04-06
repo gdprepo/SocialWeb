@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use File;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Notifications\PostLiked;
 use Illuminate\Support\Facades\DB;
@@ -78,12 +79,53 @@ class HomeController extends Controller
         }
 
         $posts = Post::where('user_id', '=', $user->id)->orderBy('id', 'DESC')->get();
+        $products = Product::where('user_id', '=', $user->id)->orderBy('id', 'DESC')->get();
+
 
 
         return view('user.profile', [
             'user' => $user,
-            'posts' => $posts
+            'posts' => $posts,
+            'products' => $products
         ]);
+    }
+
+    public function productAdd()
+    {
+        $user = Auth::user();
+
+        return view('product.add', [
+            'user' => $user,
+        ]);
+    }
+
+    public function productStore(Request $request)
+    {
+        $user = Auth::user();
+
+        $product = new Product();
+        $product->user_id = $user->id;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalName();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path() . '/uploads/product/', $filename);
+            $product->image = $filename;
+        }
+
+        $product->title = $request->input('title');
+
+        $product->price = $request->input('price');
+
+
+        if ($request->input('send')) {
+            $product->hashtags = json_encode( explode(',', $request->input('send')));
+        }
+
+        $product->save();
+
+
+        return redirect()->route('profile')->with('message', 'Vous avez créé un Produit !');
     }
 
     public function postAdd()

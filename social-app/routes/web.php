@@ -31,10 +31,17 @@ Route::get('/profile/info/{id?}', [App\Http\Controllers\HomeController::class, '
 
 Route::get('/post/show/{id}', [App\Http\Controllers\PostController::class, 'postShow'])->name('post.show');
 
+Route::get('/product/show/{id}', [App\Http\Controllers\PostController::class, 'productShow'])->name('product.show');
+
 
 Route::get('/post/add', [App\Http\Controllers\HomeController::class, 'postAdd'])->name('post.add');
 
 Route::post('/post/add/store', [App\Http\Controllers\HomeController::class, 'postStore'])->name('post.add');
+
+
+Route::get('/product/add', [App\Http\Controllers\HomeController::class, 'productAdd'])->name('product.add');
+
+Route::post('/product/add/store', [App\Http\Controllers\HomeController::class, 'productStore'])->name('product.store');
 
 
 
@@ -45,6 +52,12 @@ Route::post('/post/show/like', [App\Http\Controllers\PostController::class, 'lik
 
 
 Route::get('/notifications/all', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notifications');
+
+
+Route::get('/cart/checkout/{id?}', [App\Http\Controllers\CartController::class, 'index'])->name('cart.checkout');
+
+Route::get('/cart/add/{id?}', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+
 
 
 

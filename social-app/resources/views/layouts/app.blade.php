@@ -407,6 +407,8 @@
 
 <body>
 
+        <?php use Gloudemans\Shoppingcart\Facades\Cart; ?>
+
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <a style="text-decoration: none;" href="/">
@@ -426,10 +428,10 @@
                             <span class="badge badge-primary" style="color: white; font-size: 15px; margin-left: -18px;" id="js-count">{{ auth()->user()->unreadNotifications->count() }}</span></i>
                     </a> -->
 
-                    <a href="/card">
+                    <a href="{{ route('cart.checkout') }}">
 
                         <i style="color: black; font-size: 44px; margin-right: 5px" class="fas fa-shopping-bag"></i>
-                        <span style="margin-left: -16px; padding: 5px" class="badge badge-primary">0</span>
+                        <span style="margin-left: -16px; padding: 5px" class="badge badge-primary">{{ Cart::content()->count() }}</span>
 
                     </a>
 
@@ -442,6 +444,7 @@
                         <div style="float: left; left: 0; margin-left: -100px" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
                             <a class="dropdown-item" href="/post/add">Ajouter un Post</a>
+                            <a class="dropdown-item" href="/product/add">Ajouter un Produit</a>
                             <a class="dropdown-item" style="color: blue;" href="{{ route('notifications') }}">Notifications <span style="color: blue" id="js-count">- {{ auth()->user()->unreadNotifications->count() }} </span></a>
                             <a class="dropdown-item" style="color: red;" href="{{ route('logout') }}">Se Deconnecter</a>
                         </div>
@@ -498,10 +501,7 @@
 
 
     <script src="{{ asset('js/app.js') }}"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmIhk-nj80xGgpq_UwNcScsZs5wVGhCeQ&callback=initAutocomplete&libraries=places&v=weekly"
-      async
-    ></script>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

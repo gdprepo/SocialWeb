@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Notifications\PostLiked;
@@ -56,6 +57,16 @@ class PostController extends Controller
 
         return view('post.show', [
             'post' => $post,
+            'hash' => ""
+        ]);
+    }
+
+    public function productShow($id)
+    {
+        $product = Product::find($id);
+
+        return view('product.show', [
+            'product' => $product,
             'hash' => ""
         ]);
     }
