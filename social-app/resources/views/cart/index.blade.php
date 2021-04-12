@@ -15,30 +15,21 @@
             <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Your cart</span>
-                    <span class="badge bg-primary rounded-pill">3</span>
+                    <span class="badge bg-primary rounded-pill">{{ Cart::count() }}</span>
                 </h4>
                 <ul class="list-group mb-3">
+                    @foreach(Cart::content() as $product)
+
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
-                            <h6 class="my-0">Product name</h6>
-                            <small class="text-muted">Brief description</small>
+                            <h6 class="my-0">{{ $product->name }}</h6>
+                            @if ($product->options)
+                            <img style="width: 50%" src="{{ file_exists(public_path('uploads/product/' .$product->options->img)) ? asset('uploads/product/' .$product->options->img) : 'https://via.placeholder.com/300.png/09f/fff' }}" alt="">
+                            @endif
                         </div>
-                        <span class="text-muted">$12</span>
+                        <span style="white-space: nowrap;" class="text-muted">{{ $product->price }} €</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                        <div>
-                            <h6 class="my-0">Second product</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <span class="text-muted">$8</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                        <div>
-                            <h6 class="my-0">Third item</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <span class="text-muted">$5</span>
-                    </li>
+                    @endforeach
                     <li class="list-group-item d-flex justify-content-between bg-light">
                         <div class="text-success">
                             <h6 class="my-0">Promo code</h6>
@@ -47,17 +38,11 @@
                         <span class="text-success">−$5</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
-                        <strong>$20</strong>
+                        <span>Total (EU)</span>
+                        <strong>{{ Cart::subtotal() }} €</strong>
                     </li>
                 </ul>
 
-                <form class="card p-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Promo code">
-                        <button type="submit" class="btn btn-secondary">Redeem</button>
-                    </div>
-                </form>
             </div>
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">Billing address</h4>

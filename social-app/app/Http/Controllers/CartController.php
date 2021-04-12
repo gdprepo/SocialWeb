@@ -10,7 +10,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
-    public function index($id)
+    public function index($id = null)
     {
         $vendeur = User::find($id);
 
@@ -30,7 +30,7 @@ class CartController extends Controller
         // add the product to cart
         // $cart = Cart::add($product);
 
-        Cart::add($product->id, $product->title, 1, $product->price);
+        Cart::add($product->id, $product->title, 1, $product->price, ['img' => $product->image]);
 
        return redirect()->route('welcome')->with('message', 'Vous avez ajouté un produit a votre panier !');
 
