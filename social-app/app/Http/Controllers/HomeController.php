@@ -166,4 +166,29 @@ class HomeController extends Controller
 
         return redirect()->route('welcome')->with('message', 'Vous avez créé un post !');
     }
+
+    public function settings()
+    {
+        $user = Auth::user();
+
+        return view('settings.index', [
+            'user' => $user,
+        ]);
+
+    }
+
+    public function settingsStripe(Request $request)
+    {
+        $login = Auth::user();
+
+        $user = User::find($login->id);
+
+        $user->stripe_private = $request->input('stripe-private');
+        $user->stripe_public = $request->input('stripe-public');
+
+        $user->save();
+
+        return redirect()->route('params')->with('message', 'Vous mis à jours les parametres de Stripe !');
+
+    }
 }

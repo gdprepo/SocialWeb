@@ -4,12 +4,16 @@
 
 <div class="container">
     <main>
+        @if (Cart::count() > 0)
+
         <div class="py-5 text-center">
             <?php if ($vendeur) { ?>
-            <img src="{{ $vendeur->avatar }}" style="height: 80px;" class="rounded-circle mb-4"  alt="">
+                <img src="{{ $vendeur->avatar }}" style="height: 80px;" class="rounded-circle mb-4" alt="">
             <?php } ?>
             <h2>Checkout form</h2>
         </div>
+
+
 
         <div class="row g-5">
             <div class="col-md-5 col-lg-4 order-md-last">
@@ -27,7 +31,12 @@
                             <img style="width: 50%" src="{{ file_exists(public_path('uploads/product/' .$product->options->img)) ? asset('uploads/product/' .$product->options->img) : 'https://via.placeholder.com/300.png/09f/fff' }}" alt="">
                             @endif
                         </div>
-                        <span style="white-space: nowrap;" class="text-muted">{{ $product->price }} €</span>
+                        <form action="{{ route('cart.delete', $product->id) }}">
+                            <span style="white-space: nowrap;" class="text-muted">{{ $product->price }} €
+                                <button style="font-size: 10px;" type="submit" class="btn btn-danger ml-4">Supprimer</button>
+                        </form>
+
+                        </span>
                     </li>
                     @endforeach
                     <li class="list-group-item d-flex justify-content-between bg-light">
@@ -199,6 +208,18 @@
                 </form>
             </div>
         </div>
+
+        @else
+
+        <div style="text-align: center;" class="container">
+
+            <h3>Votre panier est vide. Continuer votre Shopping</h3>
+
+            <a href="{{ route('welcome') }}">Retour a l'accueil</a>
+
+        </div>
+
+        @endif
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">

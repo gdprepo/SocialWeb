@@ -55,9 +55,13 @@ Route::get('/notifications/all', [App\Http\Controllers\HomeController::class, 'n
 
 
 Route::get('/cart/checkout/{id?}', [App\Http\Controllers\CartController::class, 'index'])->name('cart.checkout');
+Route::get('/cart/checkout/delete/{id?}', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.delete');
 
 Route::get('/cart/add/{id?}', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
 
+
+Route::get('/settings/api', [App\Http\Controllers\HomeController::class, 'settings'])->name('params');
+Route::post('/settings/stripe/upd', [App\Http\Controllers\HomeController::class, 'settingsStripe'])->name('params.upd');
 
 
 

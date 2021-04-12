@@ -443,9 +443,10 @@
                         </a>
                         <div style="float: left; left: 0; margin-left: -100px" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
+                            <a class="dropdown-item" style="color: blue;" href="{{ route('notifications') }}">Notifications <span style="color: blue" id="js-count">- {{ auth()->user()->unreadNotifications->count() }} </span></a>
                             <a class="dropdown-item" href="/post/add">Ajouter un Post</a>
                             <a class="dropdown-item" href="/product/add">Ajouter un Produit</a>
-                            <a class="dropdown-item" style="color: blue;" href="{{ route('notifications') }}">Notifications <span style="color: blue" id="js-count">- {{ auth()->user()->unreadNotifications->count() }} </span></a>
+                            <a class="dropdown-item" href="{{ route('params') }}">Parametres</a>
                             <a class="dropdown-item" style="color: red;" href="{{ route('logout') }}">Se Deconnecter</a>
                         </div>
                     </div>
