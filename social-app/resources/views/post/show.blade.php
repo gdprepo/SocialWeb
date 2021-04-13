@@ -97,12 +97,12 @@ function format($datetime)
             <div id="{{ $post->id }}" class="img-post">
                 <img style="width: 100%;" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
                 
-                @if($post->products)
-                <div style="margin-left: 5%; margin-top: -55px; margin-bottom: 44px">
-                    <a style="text-decoration: none; background-color: #000000b5; padding: 10px; border-radius: 30px; border: 1px solid white;" href="{{ route('post.products', $post->id) }}">
-                        <i style="color: white" class="fas fa-shopping-bag"></i>
-                    </a>
-                </div>
+                @if($post->products->all() != [])
+                    <div style="margin-left: 5%; margin-top: -55px; margin-bottom: 44px">
+                        <a style="text-decoration: none; background-color: #000000b5; padding: 10px; border-radius: 30px; border: 1px solid white;" href="{{ route('post.products', $post->id) }}">
+                            <i style="color: white" class="fas fa-shopping-bag"></i>
+                        </a>
+                    </div>
 
                 @endif
 
