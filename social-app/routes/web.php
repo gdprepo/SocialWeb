@@ -53,11 +53,21 @@ Route::post('/post/show/like', [App\Http\Controllers\PostController::class, 'lik
 
 Route::get('/notifications/all', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notifications');
 
+//Cart
 
 Route::get('/cart/checkout/{id?}', [App\Http\Controllers\CartController::class, 'index'])->name('cart.checkout');
 Route::get('/cart/checkout/delete/{id?}', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.delete');
 
 Route::get('/cart/add/{id?}', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+
+
+//Paiement
+
+Route::get('/cart/checkout/paiement/load', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
+
+
+//Settings
+
 
 
 Route::get('/settings/api', [App\Http\Controllers\HomeController::class, 'settings'])->name('params');
