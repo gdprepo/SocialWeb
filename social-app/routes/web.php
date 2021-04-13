@@ -65,6 +65,10 @@ Route::post('/settings/stripe/upd', [App\Http\Controllers\HomeController::class,
 
 
 
+Route::get('/post/edit/{id}', [App\Http\Controllers\PostController::class, 'postEdit'])->name('post.edit');
+Route::post('/post/edit/store/{id}', [App\Http\Controllers\PostController::class, 'posteditUpd'])->name('postEdit.upd');
+
+
 
 
 Route::get('login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider'])->name('login_fb');

@@ -34,7 +34,10 @@ class Post extends Model
         return $this->hasMany('App\Models\Like');
     }
 
-
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
 
     public function isLikedByLoggedInUser()
     {

@@ -422,8 +422,6 @@
                     @if (Auth::check())
                 <!--
                     <a href="{{ route('notifications') }}">
-
-
                         <i style="font-size: 40px; color: blue" class="fas fa-bell mr-4">
                             <span class="badge badge-primary" style="color: white; font-size: 15px; margin-left: -18px;" id="js-count">{{ auth()->user()->unreadNotifications->count() }}</span></i>
                     </a> -->
@@ -446,7 +444,7 @@
                             <a class="dropdown-item" style="color: blue;" href="{{ route('notifications') }}">Notifications <span style="color: blue" id="js-count">- {{ auth()->user()->unreadNotifications->count() }} </span></a>
                             <a class="dropdown-item" href="/post/add">Ajouter un Post</a>
                             <a class="dropdown-item" href="/product/add">Ajouter un Produit</a>
-                            <a class="dropdown-item" href="{{ route('params') }}">Parametres</a>
+                            <a class="dropdown-item" href="{{ route('params') }}"><i class="fas fa-sliders-h"></i> Parametres</a>
                             <a class="dropdown-item" style="color: red;" href="{{ route('logout') }}">Se Deconnecter</a>
                         </div>
                     </div>

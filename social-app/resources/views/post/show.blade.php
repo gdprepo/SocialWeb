@@ -4,7 +4,9 @@
 
 @section('content')
 
-<?php use App\Models\User;
+<?php
+
+use App\Models\User;
 
 function format($datetime)
 {
@@ -54,74 +56,93 @@ function format($datetime)
 ?>
 
 <div class="container">
-<div class="col-md-8 mx-auto mb-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
+    <div class="col-md-8 mx-auto mb-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
 
-                            <div style="display: flex; justify-content: center; align-items: center; padding: 0" class="col-6">
-                                <a style="display: flex; text-decoration: none; color: black; justify-content: center; align-items: center; margin-right: auto; margin-left: 8% " href="{{ route('profile', $post->user_id) }}">
-                                    <img style="height: 44px;" class="rounded-circle" src="{{ User::find($post->user_id)->avatar }}" alt="">
-                                    <p class="ml-4" style="text-align: left; margin-top: 15px;">{{ User::find($post->user_id)->name }}</p>
-                                </a>
-
-                            </div>
-                            <div style="display:flex; justify-content: center; align-items: center; margin: 0; padding: 0" class="col-5">
-                                <p style="text-align: right; margin-left: auto" class="card-text">{{ $post->location }}</p>
-                            </div>
-
-                        </div>
+                    <div style="display: flex; justify-content: center; align-items: center; padding: 0" class="col-6">
+                        <a style="display: flex; text-decoration: none; color: black; justify-content: center; align-items: center; margin-right: auto; margin-left: 8% " href="{{ route('profile', $post->user_id) }}">
+                            <img style="height: 44px;" class="rounded-circle" src="{{ User::find($post->user_id)->avatar }}" alt="">
+                            <p class="ml-4" style="text-align: left; margin-top: 15px;">{{ User::find($post->user_id)->name }}</p>
+                        </a>
 
                     </div>
-                    <div id="{{ $post->id }}" class="img-post">
-                        <img style="width: 100%;" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
 
+
+                    @if(Auth::check())
+
+                    <div style="display:flex; justify-content: center; align-items: center; margin: 0; padding: 0; justify-content:center; margin-left: -15px" class="col-5 mr-2">
+                        <p style="text-align: right; margin-left: auto" class="card-text">{{ $post->location }}</p>
                     </div>
-                    <div class="card-body">
-                        <div style="float:left; left: 0; justify-content: center; align-items: center; width: 100%; text-align: left">
-                            <div style="margin-right: auto">
 
-                                    <form action="{{ route('posts.like') }}" id="form-js">
-
-                    
-                                        <input type="hidden" id="post-id-js" value="{{ $post->id }}">
-
-                                        @if($post->isLikedByLoggedInUser())
-                                        <button id="{{ $post->id }}" type="submit" style="padding: 0;" class="btn btn-link like"><i style="color: red; font-size: x-large" class="fas fa-heart"></i> </button>
-                                        @else
-                                        <button id="{{ $post->id }}" type="submit" style="padding: 0;" class="btn btn-link like"><i style="color: grey; font-size: x-large" class="fas fa-heart"></i> </button>
-                                        @endif
-
-                                        <div id="count-js">
-                                            {{ $post->likes->count() }} J'aime
-                                        </div>
-
-                                    </form>
-
-
-                            </div>
-
-                        </div>
-                        <p class="card-text"><a style="text-decoration: none; color: black" href="{{ route('profile', $post->user_id) }}"><strong>{{ User::find($post->user_id)->name }}</strong> </a>{{ $post->title }}</p>
-                        <div style="display: flex;">
-
-                            @foreach((array)json_decode($post->hashtags, true) as $hashtag)
-                            <p class="card-text mr-2">
-                                <a style="text-decoration: none;" href="{{ route('postHashtag', str_replace(' ', '',$hashtag)) }}">
-                                    #{{ $hashtag }}
-
-                                </a>
-                            </p>
-                            @endforeach
-                        </div>
-
-
-                        <p class="card-text" style="color:grey; font-size: 14px;float: left; left: 0">{{ format($post->created_at) }}</p>
-
+                    <div style="display: flex; justify-content: center; align-items: center; ">
+                        <a href="{{ route('post.edit', $post->id) }}">
+                            <i style="font-size: x-large; margin-top: 5px; color: black" class="fas fa-cog"></i>
+                        </a>                    
                     </div>
+
+                    @else
+
+                    <div style="display:flex; justify-content: center; align-items: center; margin: 0; padding: 0; justify-content:center;" class="col-5">
+                        <p style="text-align: right; margin-left: auto" class="card-text">{{ $post->location }}</p>
+                    </div>
+
+
+                    @endif
+
                 </div>
 
             </div>
+            <div id="{{ $post->id }}" class="img-post">
+                <img style="width: 100%;" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
+
+            </div>
+            <div class="card-body">
+                <div style="float:left; left: 0; justify-content: center; align-items: center; width: 100%; text-align: left">
+                    <div style="margin-right: auto">
+
+                        <form action="{{ route('posts.like') }}" id="form-js">
+
+
+                            <input type="hidden" id="post-id-js" value="{{ $post->id }}">
+
+                            @if($post->isLikedByLoggedInUser())
+                            <button id="{{ $post->id }}" type="submit" style="padding: 0;" class="btn btn-link like"><i style="color: red; font-size: x-large" class="fas fa-heart"></i> </button>
+                            @else
+                            <button id="{{ $post->id }}" type="submit" style="padding: 0;" class="btn btn-link like"><i style="color: grey; font-size: x-large" class="fas fa-heart"></i> </button>
+                            @endif
+
+                            <div id="count-js">
+                                {{ $post->likes->count() }} J'aime
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+                <p class="card-text"><a style="text-decoration: none; color: black" href="{{ route('profile', $post->user_id) }}"><strong>{{ User::find($post->user_id)->name }}</strong> </a>{{ $post->title }}</p>
+                <div style="display: flex;">
+
+                    @foreach((array)json_decode($post->hashtags, true) as $hashtag)
+                    <p class="card-text mr-2">
+                        <a style="text-decoration: none;" href="{{ route('postHashtag', str_replace(' ', '',$hashtag)) }}">
+                            #{{ $hashtag }}
+
+                        </a>
+                    </p>
+                    @endforeach
+                </div>
+
+
+                <p class="card-text" style="color:grey; font-size: 14px;float: left; left: 0">{{ format($post->created_at) }}</p>
+
+            </div>
+        </div>
+
+    </div>
 
 
 </div>

@@ -70,4 +70,22 @@ class PostController extends Controller
             'hash' => ""
         ]);
     }
+
+    public function postEdit($id)
+    {
+        $post = Post::find($id);
+        $products = Product::where('user_id', $post->user_id)->get();
+
+        return view('post.edit', [
+            'post' => $post,
+            'products' => $products
+        ]);
+    }
+
+    public function posteditUpd(Request $request, $id)
+    {
+        $post = Post::find($id);
+
+        $post->products()->attatch()
+    }
 }
