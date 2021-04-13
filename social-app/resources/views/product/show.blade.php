@@ -71,7 +71,7 @@ function format($datetime)
 
                     </div>
                     <div style="display:flex; justify-content: center; align-items: center; margin-left: auto; padding: 0" class="col-5">
-                    <a href="{{ route('cart.add', $product->user_id) }}">
+                    <a href="{{ route('cart.add', $product->id) }}">
                     <button class="btn btn-success">Ajouter au panier {{ money_format('%!n €', $product->price) }}</button>
                     
                     </a>

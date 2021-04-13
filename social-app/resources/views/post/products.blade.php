@@ -61,8 +61,10 @@ function format($datetime)
 
     <h3 class="mb-4" style="text-align: center;">Produit de post "{{ $post->title }}"</h3>
 
+    <div style="display: flex;">
+    
     @foreach($products as $product)
-    <div class="col-md-8 mx-auto mb-4">
+    <div class="col-6 mx-auto mb-4">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -74,9 +76,9 @@ function format($datetime)
                         </a>
 
                     </div>
-                    <div style="display:flex; justify-content: center; align-items: center; margin-left: auto; padding: 0" class="col-5">
-                    <a href="{{ route('cart.add', $product->user_id) }}">
-                    <button class="btn btn-success">Ajouter au panier {{ money_format('%!n €', $product->price) }}</button>
+                    <div style="display:flex; justify-content: center; align-items: center; margin-left: auto; padding: 0; margin-right: -8px" class="col-5">
+                    <a href="{{ route('cart.add', $product->id) }}">
+                    <button style="font-size: 14px;" class="btn btn-success"><i class="fas fa-shopping-bag"></i> {{ money_format('%!n €', $product->price) }}</button>
                     
                     </a>
                     </div>
@@ -113,6 +115,8 @@ function format($datetime)
     </div>
 
     @endforeach
+        
+    </div>
 
 </div>
 

@@ -52,6 +52,10 @@ class CartController extends Controller
             }
         }
 
+        // dd($check);
+
+        // exit;
+
         if ($check === false) {
             Cart::add($product->id, $product->title, 1, $product->price, ['img' => $product->image]);
         }
