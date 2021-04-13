@@ -17,4 +17,9 @@ class Product extends Model
         'price',
         'user_id'
     ];
+
+    public function posts()
+    {
+        return $this->belongsToMany('App\Models\Post');
+    }
 }

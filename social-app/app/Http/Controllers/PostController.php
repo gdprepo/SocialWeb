@@ -86,6 +86,29 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        $post->products()->attatch()
+        $post->products()->sync([]);
+
+        foreach ($request->input('products') as $value) {
+            # code...
+            $post->products()->attach($value);
+
+        }
+
+        $post->save();
+
+
+        return redirect()->route('post.edit', $id)->with('message', 'Vous avez mis à jour le POST !');
+
+    }
+
+    public function postProduct($id)
+    {
+        $post = Post::find($id);
+        $products = $post->products()->get();
+
+        return view('post.products', [
+            'post' => $post,
+            'products' => $products
+        ]);
     }
 }

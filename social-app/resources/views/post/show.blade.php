@@ -79,7 +79,7 @@ function format($datetime)
                     <div style="display: flex; justify-content: center; align-items: center; ">
                         <a href="{{ route('post.edit', $post->id) }}">
                             <i style="font-size: x-large; margin-top: 5px; color: black" class="fas fa-cog"></i>
-                        </a>                    
+                        </a>
                     </div>
 
                     @else
@@ -96,6 +96,11 @@ function format($datetime)
             </div>
             <div id="{{ $post->id }}" class="img-post">
                 <img style="width: 100%;" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
+                <div style="margin-left: 5%; margin-top: -55px; margin-bottom: 44px">
+                    <a style="text-decoration: none; background-color: #000000b5; padding: 10px; border-radius: 30px; border: 1px solid white;" href="{{ route('post.products', $post->id) }}">
+                        <i style="color: white" class="fas fa-shopping-bag"></i>
+                    </a>
+                </div>
 
             </div>
             <div class="card-body">

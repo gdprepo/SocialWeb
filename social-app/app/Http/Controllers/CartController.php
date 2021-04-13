@@ -45,13 +45,14 @@ class CartController extends Controller
             var_dump('check');
         }
 
+
         foreach(Cart::content() as $prod) {
             if($prod->id == $id ) {
                 $check = true;
             }
         }
 
-        if ($check == false) {
+        if ($check === false) {
             Cart::add($product->id, $product->title, 1, $product->price, ['img' => $product->image]);
         }
 

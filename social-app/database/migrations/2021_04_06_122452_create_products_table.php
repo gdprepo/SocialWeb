@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->json('hashtags')->nullable();
             $table->integer('price');
             $table->integer('user_id');
+            $table->unsignedInteger('post_id');
             $table->timestamps();
         });
     }

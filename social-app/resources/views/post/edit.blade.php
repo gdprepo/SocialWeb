@@ -77,7 +77,7 @@
     <div class="row" style="justify-content: center; align-items: center">
 
 
-        <form action="/post/edit/store/{ $post->id }" method="POST" enctype="multipart/form-data">
+        <form action="/post/edit/store/{{ $post->id }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group">
@@ -96,7 +96,7 @@
                     @endforeach
                 </label>
                 <div>
-                <select style="border: 2px solid grey;" class="form-select" aria-label="Disabled select example" multiple>
+                <select name="products[]" style="border: 2px solid grey;" class="form-select" aria-label="Disabled select example" multiple>
                     <option selected>Selectionner des produits</option>
                     @foreach($products as $product)
                     <option value="{{ $product->id }}">{{ $product->title }}</option>

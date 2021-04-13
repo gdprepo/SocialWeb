@@ -36,7 +36,8 @@ class Post extends Model
 
     public function products()
     {
-        return $this->hasMany('App\Models\Product');
+        return $this->belongsToMany('App\Models\Product');
+       
     }
 
     public function isLikedByLoggedInUser()
