@@ -398,6 +398,9 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" />
 
+    @yield('extra-script')
+
+
     <style>
         body {
             font-family: 'Nunito';

@@ -7,6 +7,7 @@ use Stripe\Stripe;
 use App\Models\User;
 use App\Models\Product;
 use Stripe\PaymentIntent;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -24,7 +25,7 @@ class CheckoutController extends Controller
         }
 
         $user = User::find($userId);
-        $key = $user->stripe_public;
+        $key = $user->stripe_private;
         
         try {
             Stripe::setApiKey($key);
@@ -33,8 +34,14 @@ class CheckoutController extends Controller
                 'amount' => round(Cart::total()),
                 'currency' => 'eur'
             ]);
-            dd($intent);
-            exit;
+
+
+            $clientSecret = Arr::get($intent, 'client_secret');
+
+            return view('checkout.index', [
+                'clientSecret' => $clientSecret,
+                'key' => $user->stripe_public
+            ]);
             
         } catch (Exception $e) {
             dd('okok');
@@ -42,15 +49,6 @@ class CheckoutController extends Controller
             exit;
 
         }
-
-
-   
-
-
-
-
-
-
 
         // return view('checkout.index');
     }

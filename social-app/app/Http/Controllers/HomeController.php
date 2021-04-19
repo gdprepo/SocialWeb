@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Notifications\PostLiked;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -93,6 +94,14 @@ class HomeController extends Controller
     public function productAdd()
     {
         $user = Auth::user();
+
+        if (!$user->stripe_private && !$user->stripe_public) {
+            Session::flash('message', 'Vous devez enregistrer vos Clefs Stripe !');
+            
+            return view('settings.index', [
+                'user' => $user,
+            ]);
+        }
 
         return view('product.add', [
             'user' => $user,
