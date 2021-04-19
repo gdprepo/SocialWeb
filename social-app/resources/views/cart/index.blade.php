@@ -6,11 +6,13 @@
     <main>
         @if (Cart::count() > 0)
 
-        <div class="py-5 text-center">
+        <div class="py-5 text-center" style="margin-bottom: -50px; margin-top: -100px">
             <?php if ($vendeur) { ?>
                 <img src="{{ $vendeur->avatar }}" style="height: 80px;" class="rounded-circle mb-4" alt="">
             <?php } ?>
-            <h2>Checkout form</h2>
+            <div>
+                <img style="width: 50%;" src="{{ asset('img/checkout/info.png') }}" alt="">
+            </div>
         </div>
 
 
