@@ -4,6 +4,71 @@
 
 @section('content')
 
+<style>
+    .likeInsta i {
+        position: absolute;
+        top: 35%;
+        left: 45%;
+        color: black;
+        opacity: 0;
+    }
+
+    .heart {
+        animation: show 1s linear;
+    }
+
+    @keyframes show {
+        0% {
+            opacity: 0;
+        }
+
+        20% {
+            transform: scale(1.5);
+            opacity: 0.8;
+        }
+
+        50% {
+            transform: scale(1.3);
+            opacity: 0.8;
+        }
+
+        50% {
+            transform: none;
+            opacity: 0.8;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    ::selection {
+        background-color: none;
+        color: none;
+    }
+</style>
+
+<script>
+    function heart(idx) {
+        console.log('test')
+        var x = document.querySelectorAll('.fa-3x');
+
+        var index = 0;
+        x.forEach((e) => {
+            if (index == idx) {
+                e.classList.add('heart');
+                setTimeout(function() {
+                    e.classList.remove('heart');
+                }, 1000);
+            }
+
+            index++
+        })
+
+
+    }
+</script>
+
 <?php
 
 use App\Models\User;
@@ -66,6 +131,7 @@ function format($datetime)
     <div class="row">
 
         <div class="col-7 mx-auto mb-4">
+            <?php $idx = 0; ?>
 
             @foreach($posts as $post)
             <div class="col-md-12  mb-4">
@@ -88,8 +154,12 @@ function format($datetime)
 
                     </div>
                     <div id="{{ $post->id }}" class="img-post">
-                        <img style="width: 100%;" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
-                        
+                        <div class="likeInsta">
+                            <img style="width: 100%;" ondblclick="heart('{{ $idx }}')" src="{{ file_exists(public_path('uploads/post/' .$post->image)) ? asset('uploads/post/' .$post->image) : 'https://via.placeholder.com/300.png/09f/fff' }}" class="card-img-top" alt="...">
+                            <i class="fas fa-heart fa-3x"></i>
+                            <?php $idx++; ?>
+
+                        </div>
 
                         @if($post->products->all() != [])
                         <div style="margin-left: 5%; margin-top: -55px; margin-bottom: 44px">
