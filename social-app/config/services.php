@@ -33,13 +33,13 @@ return [
     'facebook' => [
         'client_id' => "1128760940880388",
         'client_secret' => "cc8a80a16e48b6ec284b34f52b84f415",
-        'redirect' => 'http://localhost:8000/login/facebook/callback',
+        'redirect' => 'http://127.0.0.1:8000/login/facebook/callback',
     ],
 
     'google' => [
         'client_id' => '618400331239-b00urhu2iun6thanrokm7mjdvgdmrkpe.apps.googleusercontent.com',
         'client_secret' => 'XuB3RkceOPrzv0__oopavHHM',
-        'redirect' => 'http://localhost:8000/auth/google/callback',
+        'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
     ],
 
 ];
