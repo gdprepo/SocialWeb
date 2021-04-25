@@ -69,6 +69,37 @@
 
     // Add an instance of the card Element into the `card-element` <div>.
     card.mount('#card-element');
+    const displayError = document.getElementById('card-errors')
+
+    card.addEventListener('change', ({error}) => {
+        if (error) {
+            displayError.classList.add('alert', 'alert-warning');
+            displayError.textContent = error.message;
+        } else {
+            displayError.classList.remove('alert', 'alert-warning');
+            displayError.textContent = '';
+        }
+    })
+
+    var submitButton = document.getElementById('submit');
+
+    submitButton.addEventListener('click', function(ev) {
+        ev.preventDefault();
+        stripe.confirmCardPayment("{{ $clientSecret }}", {
+            payment_method: {
+                card: card,
+            }
+        }).then(function(result) {
+            if (result.error) {
+
+                console.log(result.error.message)
+            } else {
+                if ( result.paymentIntent.status === 'succeeded' ) {
+                    console.log(result.paymentIntent)
+                }
+            }
+        })
+    })
 </script>
 
 

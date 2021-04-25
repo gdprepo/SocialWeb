@@ -11,7 +11,7 @@
         <div class="col-md-7 mx-auto mb-4">
             <div style="display: flex;" class="row ml-2">
                 <div class="col-4">
-                    <img style="height: 100px;" class="rounded-circle" src="{{  $user->avatar }}" alt="">
+                    <img style="height: 100px;" class="rounded-circle" src="{{ asset($user->avatar) }}" alt="">
 
                 </div>
                 <div style=" text-align:center; display: flex; margin-left: -40px" class="col-6">

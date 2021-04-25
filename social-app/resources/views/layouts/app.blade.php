@@ -438,7 +438,7 @@
 
                     <div class="dropdown">
                         <a style="color: #1a202c; text-decoration: none" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="ml-4" style="text-decoration: none; float: right; right: 0">
-                            <img style="height: 50px;" class="rounded-circle" src="{{ Auth::check() ? Auth::user()->avatar : asset('img/user/username.gif')  }}" alt="">
+                            <img style="height: 50px;" class="rounded-circle" src="{{ Auth::check() ? asset(Auth::user()->avatar): asset('img/user/username.gif')  }}" alt="">
                             <span class="badge badge-primary" style="color: white; font-size: 15px; margin-left: -18px; margin-bottom: -30px" id="js-count">{{ auth()->user()->unreadNotifications->count() }}</span></i>
                         
                         </a>
@@ -461,7 +461,7 @@
 
                     </a>
                     <a class="ml-4 " href="/profile" style="text-decoration: none; float: right; right: 0">
-                        <img style="height: 50px;" class="rounded-circle" src="{{ Auth::check() ? Auth::user()->avatar : asset('img/user/username.gif') }}" alt="">
+                        <img style="height: 50px;" class="rounded-circle" src="{{ Auth::check() ? asset(Auth::user()->avatar) : asset('img/user/username.gif') }}" alt="">
 
 
                     </a>

@@ -44,7 +44,7 @@ class CheckoutController extends Controller
             ]);
             
         } catch (Exception $e) {
-            dd('okok');
+            dd($key);
 
             exit;
 
