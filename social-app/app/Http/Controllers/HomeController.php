@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use File;
+use Exception;
+use Stripe\Stripe;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Product;
+use Stripe\PaymentIntent;
 use Illuminate\Http\Request;
 use App\Notifications\PostLiked;
+use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -51,7 +55,7 @@ class HomeController extends Controller
     {
         $posts = Post::orderBy('id', 'DESC')->get();
         $users = User::all();
-    
+
         return view('welcome', [
             'posts' => $posts,
             'users' => $users,
@@ -61,9 +65,9 @@ class HomeController extends Controller
 
     public function postHashtag($hashtag)
     {
-        $posts = Post::orderBy('id', 'DESC')->where('hashtags','like','%'.$hashtag.'%')->get();
+        $posts = Post::orderBy('id', 'DESC')->where('hashtags', 'like', '%' . $hashtag . '%')->get();
         $users = User::all();
-    
+
         return view('welcome', [
             'posts' => $posts,
             'users' => $users,
@@ -97,7 +101,7 @@ class HomeController extends Controller
 
         if (!$user->stripe_private && !$user->stripe_public) {
             Session::flash('message', 'Vous devez enregistrer vos Clefs Stripe !');
-            
+
             return view('settings.index', [
                 'user' => $user,
             ]);
@@ -128,7 +132,7 @@ class HomeController extends Controller
 
 
         if ($request->input('send')) {
-            $product->hashtags = json_encode( explode(',', $request->input('send')));
+            $product->hashtags = json_encode(explode(',', $request->input('send')));
         }
 
         $product->save();
@@ -163,7 +167,7 @@ class HomeController extends Controller
         $post->title = $request->input('title');
 
         if ($request->input('send')) {
-            $post->hashtags = json_encode( explode(',', $request->input('send')));
+            $post->hashtags = json_encode(explode(',', $request->input('send')));
         }
 
         if ($request->input('location')) {
@@ -183,21 +187,38 @@ class HomeController extends Controller
         return view('settings.index', [
             'user' => $user,
         ]);
-
     }
 
     public function settingsStripe(Request $request)
     {
-        $login = Auth::user();
 
-        $user = User::find($login->id);
 
-        $user->stripe_private = $request->input('stripe-private');
-        $user->stripe_public = $request->input('stripe-public');
+        try {
+            Stripe::setApiKey($request->input('stripe-private'));
 
-        $user->save();
 
-        return redirect()->route('params')->with('message', 'Vous mis à jours les parametres de Stripe !');
+            $intent = PaymentIntent::create([
+                'amount' => "100",
+                'currency' => 'eur',
+                'metadata' => [
+                    'userId' => Auth::user()->id
+                ]
+            ]);
 
+
+            $login = Auth::user();
+
+            $user = User::find($login->id);
+
+            $user->stripe_private = $request->input('stripe-private');
+            $user->stripe_public = $request->input('stripe-public');
+
+            $user->save();
+            return redirect()->route('params')->with('message', 'Vous mis à jours les parametres de Stripe !');
+
+        } catch (Exception $e) {
+            return redirect()->route('params')->with('error', "La clef public n'est pas correct !");
+        
+        }
     }
 }

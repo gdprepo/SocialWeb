@@ -483,6 +483,9 @@
         @if(Session::has('message'))
         <p class="container alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
+        @if(Session::has('error'))
+        <p class="container alert {{ Session::get('alert-class', 'alert-warning') }}">{{ Session::get('error') }}</p>
+        @endif
 
         @yield('content')
 
