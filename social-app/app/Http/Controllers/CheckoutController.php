@@ -9,6 +9,7 @@ use App\Models\Product;
 use Stripe\PaymentIntent;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CheckoutController extends Controller
@@ -20,6 +21,10 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        if (Cart::count() <= 0 ) {
+            return redirect()->route('welcome');
+        }
+
         foreach(Cart::content() as $prod) {    
             $userId = Product::find($prod->id)->user_id;
         }
@@ -32,7 +37,10 @@ class CheckoutController extends Controller
 
             $intent = PaymentIntent::create([
                 'amount' => round(Cart::total()),
-                'currency' => 'eur'
+                'currency' => 'eur',
+                'metadata' => [
+                    'userId' => Auth::user()->id
+                ]
             ]);
 
 
@@ -71,7 +79,11 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Cart::destroy();
+
+        $data = $request->json()->all();
+
+        return $data['paymentIntent'];
     }
 
     /**

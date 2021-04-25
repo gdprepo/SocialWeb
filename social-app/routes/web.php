@@ -64,6 +64,10 @@ Route::get('/cart/add/{id?}', [App\Http\Controllers\CartController::class, 'add'
 //Paiement
 
 Route::get('/cart/checkout/paiement/load', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/cart/checkout/paiement/store', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/cart/checkout/paiement/merci', function() {
+    return view('checkout.thankyou');
+});
 
 
 //Settings
