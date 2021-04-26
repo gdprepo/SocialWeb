@@ -70,7 +70,7 @@ function format($datetime)
                     </div>
 
 
-                    @if(Auth::check())
+                    @if(Auth::user()->id == $post->user_id)
 
                     <div style="display:flex; justify-content: center; align-items: center; margin: 0; padding: 0; justify-content:center; margin-left: -15px" class="col-5 mr-2">
                         <p style="text-align: right; margin-left: auto" class="card-text">{{ $post->location }}</p>
