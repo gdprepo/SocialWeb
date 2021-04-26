@@ -56,23 +56,26 @@
             <button style="width: 100%" class="btn btn-lg btn-primary btn-block mb-2"><i class="fab fa-facebook-f"></i></button>
         </a>
         <a href="{{ url('auth/google') }}">
-        <button style="width: 100%" class="btn btn-lg btn-danger btn-block mb-4" type="submit"><i class="fab fa-google"></i></button>
+            <button style="width: 100%" class="btn btn-lg btn-danger btn-block mb-4" type="submit"><i class="fab fa-google"></i></button>
 
         </a>
-    <form method="post" action="{{ route('login') }}">
-    @csrf
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button style="width: 100%" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
-    </form>
+        <form method="post" action="{{ route('login') }}">
+            @csrf
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <div class="checkbox">
+                    <a href="{{ route('register') }}">S'incscrire</a>
+            </div>
+            <button style="width: 100%" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+        </form>
     </div>
 
 </div>

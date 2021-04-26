@@ -41,15 +41,20 @@
 
 
 
-                        <div class="form-group{{ $errors->has('profile_picture') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Profile Picture</label>
-                            <input id="avatar" type="file" class="form-control" name="avatar">
+                        <div class="form-group{{ $errors->has('profile_picture') ? ' has-error' : '' }} row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Profile Picture</label>
 
-                            @if ($errors->has('avatar'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('avatar') }}</strong>
-                            </span>
-                            @endif
+                            <div class="col-md-6">
+
+                                <input id="avatar" type="file" class="form-control" name="avatar">
+
+                                @if ($errors->has('avatar'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('avatar') }}</strong>
+                                </span>
+                                @endif
+
+                            </div>
                         </div>
 
                         <div class="form-group row">

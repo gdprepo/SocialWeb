@@ -14,10 +14,12 @@
 
 @section('content')
 
-<div class="py-5 text-center" style="margin-bottom: -150px; margin-top: 0px">
-    <div>
-        <img style="width: 45%; margin-top: -50px" src="{{ asset('img/checkout/paiement.png') }}" alt="">
-    </div>
+<div class="py-5 text-center" style="margin-bottom: 0px; margin-top: -80px">
+    <ul style="margin-top: 50px; margin-bottom: 50px" class="progressbar">
+        <li>Informations</li>
+        <li  class="active">Paiement</li>
+        <li>Confirmation</li>
+    </ul>
 </div>
 
 <div style="box-shadow: 0 2px 8px rgb(0 0 0 / 10%); margin-top: 100px; padding-top: 30px" class="col-md-8 mx-auto">

@@ -2,17 +2,20 @@
 
 @section('content')
 
+
 <div class="container">
     <main>
         @if (Cart::count() > 0)
 
-        <div class="py-5 text-center" style="margin-bottom: -50px; margin-top: -100px">
+        <div class="py-5 text-center" style="margin-bottom: 50px; margin-top: -100px">
             <?php if ($vendeur) { ?>
                 <img src="{{ $vendeur->avatar }}" style="height: 80px;" class="rounded-circle mb-4" alt="">
             <?php } ?>
-            <div>
-                <img style="width: 50%;" src="{{ asset('img/checkout/info.png') }}" alt="">
-            </div>
+            <ul style="margin-top: 50px; margin-bottom: 50px" class="progressbar">
+                <li class="active">Informations</li>
+                <li>Paiement</li>
+                <li>Confirmation</li>
+            </ul>
         </div>
 
 

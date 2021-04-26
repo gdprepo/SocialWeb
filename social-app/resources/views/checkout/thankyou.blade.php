@@ -3,6 +3,15 @@
 
 @section('content')
 
+<div class="col-md-12">
+    <ul style="margin-top: -50px; margin-bottom: 100px" class="progressbar">
+        <li>Informations</li>
+        <li>Paiement</li>
+        <li class="active">Confirmation</li>
+    </ul>
+</div>
+
+
 <div style="box-shadow: 0 2px 8px rgb(0 0 0 / 10%); margin-top: 100px" class="col-md-8 mx-auto">
 
     <div class="py-5 text-center" style="margin-bottom: -50px; margin-top: 0px">
