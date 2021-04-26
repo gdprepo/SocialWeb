@@ -19,7 +19,7 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Cart::count() <= 0 ) {
             return redirect()->route('welcome');
@@ -33,13 +33,15 @@ class CheckoutController extends Controller
         $key = $user->stripe_private;
         
         try {
+
             Stripe::setApiKey($key);
 
             $intent = PaymentIntent::create([
-                'amount' => round(Cart::total()),
+                'amount' => round(Cart::subtotal()),
                 'currency' => 'eur',
                 'metadata' => [
-                    'userId' => Auth::user()->id
+                    'userId' => Auth::user()->id,
+                    'address' => $request->input('address')
                 ]
             ]);
 

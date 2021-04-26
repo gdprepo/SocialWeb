@@ -73,8 +73,14 @@ function format($datetime)
                     <div style="display:flex; justify-content: center; align-items: center; margin-left: auto; padding: 0" class="col-5">
                     <a href="{{ route('cart.add', $product->id) }}">
                     <button class="btn btn-success">Ajouter au panier {{ money_format('%!n €', $product->price) }}</button>
-                    
                     </a>
+
+                                        
+                    @if (Auth::user()->id == $product->user_id)
+                    <a href="{{ route('product.delete', $product->id) }}">
+                    <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </a>
+                    @endif
                     </div>
 
                 </div>

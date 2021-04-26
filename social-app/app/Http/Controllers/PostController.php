@@ -125,4 +125,18 @@ class PostController extends Controller
             'products' => $products
         ]);
     }
+
+    public function productDelete($id) {
+        $product = Product::find($id);
+
+        if (Auth::user()->id == $product->user_id) {
+            $product->delete();
+            return redirect()->route('welcome')->with('message', 'Vous bien supprimé votre produit !');
+        } else {
+            return redirect()->route('welcome')->with('message', 'Vous ne pouvez pas supprimer ce produit !');
+
+        }
+
+
+    }
 }

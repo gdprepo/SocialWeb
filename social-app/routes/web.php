@@ -33,6 +33,9 @@ Route::get('/post/show/{id}', [App\Http\Controllers\PostController::class, 'post
 
 Route::get('/product/show/{id}', [App\Http\Controllers\PostController::class, 'productShow'])->name('product.show');
 
+Route::get('/product/delete/{id}', [App\Http\Controllers\PostController::class, 'productDelete'])->name('product.delete');
+
+
 
 Route::get('/post/add', [App\Http\Controllers\HomeController::class, 'postAdd'])->name('post.add');
 
@@ -63,7 +66,7 @@ Route::get('/cart/add/{id?}', [App\Http\Controllers\CartController::class, 'add'
 
 //Paiement
 
-Route::get('/cart/checkout/paiement/load', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/cart/checkout/paiement/load', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/cart/checkout/paiement/store', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
 Route::get('/cart/checkout/paiement/merci', function() {
     return view('checkout.thankyou');
