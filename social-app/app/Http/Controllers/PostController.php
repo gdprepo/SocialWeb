@@ -73,7 +73,14 @@ class PostController extends Controller
 
     public function postEdit($id)
     {
+
         $post = Post::find($id);
+
+        if ($post->user_id != Auth::user()->id) {
+            return redirect()->route('welcome')->with('message', 'Vous devez etre connécté avec le bon utilisateur !');
+
+        }
+
         $products = Product::where('user_id', $post->user_id)->get();
 
         return view('post.edit', [
@@ -86,7 +93,14 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        $post->products()->sync([]);
+        if ($request->input('title')) {
+            $post->title = $request->input('title');
+        }
+
+        if ($request->input('products')) {
+            $post->products()->sync([]);
+
+        }
 
         foreach ($request->input('products') as $value) {
             # code...
