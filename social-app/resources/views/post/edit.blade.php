@@ -91,8 +91,8 @@
 
             <div class="form-group">
                 <label for="exampleFormControlFile1">Products:
-                    @foreach($post->products() as $product)
-                    {{ $product }}
+                    @foreach($post->products as $product)
+                    {{ $product->title }} 
                     @endforeach
                 </label>
                 <div>
