@@ -72,7 +72,7 @@
 
 
 <div class="container">
-    <h3 class="mb-4" style="text-align: center;">Créer un POST</h3>
+    <h3 class="mb-4" style="text-align: center;">Modifier le POST</h3>
 
     <div class="row" style="justify-content: center; align-items: center">
 
